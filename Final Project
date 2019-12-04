@@ -1,0 +1,78 @@
+Q(preliminary_question): Are you seeking protection from one or more occurrences of abuse?
+A: yes
+	Q(1.1):GOTO:venue_1
+A: no
+	Q(do_not_qualify_message): You may not qualify for a §209A Abuse Prevention Order under G.L. 209A. The statute serves those seeking protection from a family or household member who has demonstrated abuse one or more occasions. For more information about the statute's interpretation of abuse <a href="https:/https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter209a/Section1">please click here</a>
+Q(venue_1): Did the abuse occur in your place of residence?
+A: yes
+	Q(2.1):GOTO:family_household
+A: no
+	Q(venue_2): Did the abuse occur in a former place of residence?
+	A: yes
+		Q(2.2.1):GOTO:family_household
+	A: no
+		Q(2.2.2): Did you leave the residence to avoid abuse?
+		A: yes
+			Q(2.2.2.1):GOTO:family_household
+		A: no
+			Q(2.2.2.2): you may still qualify for an abuse prevention order, do you want to keep going?
+			A: yes
+				Q(2.2.2.2.1):GOTO:family_household
+			A: no
+				Q(thank_you): thank you for trying my application. If you still would like more help, consider visiting your local court or court help center. <a href="https://www.mass.gov/courthouse-locator">Link to Courthouse locator</a>
+Q(family_household): Did you suffer abuse from a family member or household member?
+A: yes
+	Q(married): are you married to the person or were you previously married to the person?
+	A: yes
+		Q(3.1.1):GOTO:physical_hurt
+	A: no
+		Q(dating): are you dating the person or were you dating the person at some point?
+		A: yes
+			Q(3.1.2.1):GOTO:physical_hurt
+		A: no
+			Q(child): do you have a child with that person? (regardless of marriage or if you are living together)
+			A: yes
+				Q(3.1.2.2.1):GOTO:physical_hurt
+			A: no
+				Q(related): are you related to the person by blood? (ex: cousin, sister, mother, brother-in-law)
+				A: yes
+					Q(3.1.2.2.2.1):GOTO:physical_hurt
+				A: no
+					Q(3.1.2.2.2.2):GOTO:do_not_qualify_message
+A: no
+	Q(3.2):GOTO:do_not_qualify_message
+Q(physical_hurt): Did they hurt you physically or try to hurt you physically?
+A: yes
+	Q(4.1):GOTO:urgent
+A: no
+	Q(4.2): Did they make you scared of getting physically hurt?
+	A: yes
+		Q(4.2.1):GOTO:urgent
+	A:no
+		Q(sexual_contact): Did they force you to have sex or have any sexual contact? 
+		A: yes
+			Q(4.2.2.1):GOTO:urgent
+		A:no
+			Q(4.2.2.2): Did they make you have sex or have any sexual contact by threatening you or making you feel like you did not have any choice? 
+			A: yes
+				Q(4.2.2.2.1):GOTO:urgent
+			A: no
+				Q(4.2.2.2.2):GOTO:do_not_qualify_message
+Q(urgent): Is there a substantial likelihood that you are in immediate danger?
+A:yes
+	Q(5.1): you may be eligible for "ex parte" relief. This means this is an emergency and at the request of one party a temporary restraining order could be issued. Would you like more information about how to get an emergency order?
+	A: yes
+		Q(5.1.1):  An emergency order is available through any police department after court hours and on weekends. Would you like to continue learning more?
+		A:yes
+			Q(5.1.1.1):GOTO:jurisdiction
+		A:no
+			Q(5.1.1.2):GOTO:thank_you
+	A: no
+		Q(5.1.2):GOTO:jurisdiction
+A:no
+	Q(5.2):GOTO:jurisdiction
+Q(jurisdiction): Would you like to know where you can obtain a 209A protective order?
+A: yes
+	Q(6.1): You may obtain a restraining order at any district & BMC court, superior, or probate and family court in Massachusetts. You may not obtain an order in a superior court if you are in a dating relationship. <a href="https://www.mass.gov/guides/find-a-courthouse-serving-you">Here is the link to finding a local court in your city</a> 
+A:no
+	Q(6.2):GOTO:thank_you
